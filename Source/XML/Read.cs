@@ -1,4 +1,3 @@
-using System.Reflection;
 using System.Xml.Serialization;
 
 namespace CutieBot.Source.XML;
@@ -11,6 +10,7 @@ public static class ReadXML
 
         XmlSerializer serialiser = new XmlSerializer(typeof(ConfigModel));
         
+        // Read the entire file into the item variable
         using Stream stream = new FileStream(path, FileMode.Open);
         ConfigModel item = (ConfigModel)serialiser.Deserialize(stream);
 
@@ -26,6 +26,8 @@ public static class ReadXML
         };
     }
 
+    // This is janky but we get the entire contents of the config file;
+    // We add the compliment from the model.. THEN we rewrite the entire file.
     public static void NewCompliment(string compliment)
     {
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data/Config.xml");

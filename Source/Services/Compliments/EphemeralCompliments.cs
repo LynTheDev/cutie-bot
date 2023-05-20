@@ -5,6 +5,7 @@ public class EphemeralCompliments : ICompliments
     public EphemeralCompliments(List<string> compliments)
         => ComplimentsList.AddRange(compliments);
 
+    // We make a temp list to return to the IEnumerable; why? idk
     private List<string> ComplimentsList = new List<string>();
     public IEnumerable<string> Compliments => ComplimentsList;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using CutieBot.Source.Services;
 using CutieBot.Source.Services.Compliments;
 using CutieBot.Source.Services.Logs;
@@ -23,18 +22,20 @@ public static class CutieBot
             Token = (string)Config["Token"]
         });
 
+        // Services
         IServiceCollection services = new ServiceCollection();
         services.AddSingleton(client);
         services.AddSingleton<ICompliments>(new EphemeralCompliments(
             (List<string>)Config["Compliments"]
         ));
-        services.AddSingleton<ILogWriter>(new LogWriter());
+        services.AddSingleton<ILogWriter>(new LogWriter()); // Logging system implemented my m i r
         services.AddSingleton<ComplimentTimer>();
 
         ServiceProvider = services.BuildServiceProvider();
 
         ILogWriter Logger = ServiceProvider.GetRequiredService<ILogWriter>();
 
+        // Setting up slash commands
         SlashCommandsExtension slashCommands = client.UseSlashCommands(new SlashCommandsConfiguration()
         {
             Services = ServiceProvider
@@ -43,6 +44,7 @@ public static class CutieBot
         slashCommands.RegisterCommands(Assembly.GetExecutingAssembly());
         Logger.WriteLog("Loaded commands!", LogLevel.Info);
 
+        // Handling Errors
         slashCommands.SlashCommandErrored += async (_, e) => {
             Logger.WriteLog(e.Exception.Message, LogLevel.Error);
 
@@ -65,6 +67,7 @@ public static class CutieBot
         ComplimentTimer timer = ServiceProvider.GetRequiredService<ComplimentTimer>();
         timer.SetTimer();
 
+        // This waits for an imput, aka Ctrl-C to move to the next lines
         using (SemaphoreSlim sem = new SemaphoreSlim(0, 1))
         {
             Console.CancelKeyPress += (_, e) => {

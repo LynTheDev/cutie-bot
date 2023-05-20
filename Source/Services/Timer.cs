@@ -21,7 +21,7 @@ public class ComplimentTimer
 
     public void SetTimer()
     {
-        System.Timers.Timer timer = new System.Timers.Timer(5400000);
+        System.Timers.Timer timer = new System.Timers.Timer(3600000); // 1 Hour
 
         timer.Elapsed += TimePassed;
 

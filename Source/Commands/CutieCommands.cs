@@ -1,11 +1,6 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus;
 using DSharpPlus.SlashCommands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CutieBot.Source.Services.Compliments;
 using CutieBot.Source.XML;
 
@@ -26,10 +21,13 @@ public class CutieCommands : ApplicationCommandModule
         [Option("compliment", "The compliment to attach to the compliments list.")] string compliment
     )
     {
+        // Here the bot DMS me so I can manually edit in case something goes wrong
         DiscordMember user = await ctx.Guild.GetMemberAsync((ulong)CutieBot.Config["NID"]);
         await user.SendMessageAsync($"{CutieBot.Config["Name"]} has implemented: {compliment}");
 
+        // This add compliment function is used to temporarily update, till the bot resets.
         Compliments.AddCompliment(compliment);
+
         ReadXML.NewCompliment(compliment);
 
         await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
@@ -38,10 +36,10 @@ public class CutieCommands : ApplicationCommandModule
         );
     }
 
-    [SlashCommand($"marry", $"Marry someone")]
+    [SlashCommand("marry", "Marry someone")]
     public async Task MarryCommand(
         InteractionContext ctx,
-        [Option("user", $"The user to marry")] DiscordUser member
+        [Option("user", "The user to marry")] DiscordUser member
     )
     {
         DiscordEmbed marryEmbed = new DiscordEmbedBuilder()
