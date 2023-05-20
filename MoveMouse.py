@@ -10,11 +10,14 @@ from typing import Final
 
 if __name__ == "__main__":
     pyautogui.FAILSAFE = True
+    print("Initialised.")
     
     DURATION: Final[int] = 1
     while True:
         x: int = randint(500, 1000)
         y: int = randint(500, 1000)
         pyautogui.moveTo(x, y, DURATION)
+
+        print(f"Mouse moved to {x}, {y}")
 
         sleep(10*60)  # 10 Minutes
