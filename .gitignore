@@ -1,0 +1,8 @@
+.vscode/
+.vs/
+.idea/
+
+Data/Config.xml
+
+obj/
+bin/
