@@ -20,4 +20,4 @@ if __name__ == "__main__":
 
         print(f"Mouse moved to {x}, {y}")
 
-        sleep(10*60)  # 10 Minutes
+        sleep(5*60)  # 10 Minutes
