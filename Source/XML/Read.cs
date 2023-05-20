@@ -4,18 +4,23 @@ namespace CutieBot.Source.XML;
 
 public static class ReadXML
 {
-    public static string GetToken()
+    public static Dictionary<string, object> GetConfigDict()
     {
-        string token = string.Empty;
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data/Config.xml");
 
         XmlSerializer serialiser = new XmlSerializer(typeof(ConfigModel));
-        using (Stream stream = new FileStream(path, FileMode.Open))
-        {
-            ConfigModel item = (ConfigModel)serialiser.Deserialize(stream);
-            token = item.Token;
-        }
+        
+        using Stream stream = new FileStream(path, FileMode.Open);
+        ConfigModel item = (ConfigModel)serialiser.Deserialize(stream);
 
-        return token;
+        return new Dictionary<string, object>()
+        {
+            {"Token", item.Token},
+            {"Name", item.Name},
+
+            {"NID", item.NID},
+            {"CID", item.CID}
+        };
+
     }
 }

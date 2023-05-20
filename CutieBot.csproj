@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Source\Commands\" />
+    <None Remove="Data\Config.xml" />
+    <None Remove="Data\Logs.log" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,4 +7,13 @@ public class ConfigModel
 {
     [XmlElement("Token")]
     public string Token { get; set; }
+
+    [XmlElement("NID")]
+    public ulong NID { get; set; }
+
+    [XmlElement("CID")]
+    public ulong CID { get; set; }
+
+    [XmlElement("Name")]
+    public string Name { get; set; }
 }
