@@ -16,4 +16,8 @@ public class ConfigModel
 
     [XmlElement("Name")]
     public string Name { get; set; }
+
+    [XmlArray("Compliments")]
+    [XmlArrayItem("value")]
+    public List<string> Compliments { get; set; }
 }

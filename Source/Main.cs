@@ -26,15 +26,7 @@ public static class CutieBot
         IServiceCollection services = new ServiceCollection();
         services.AddSingleton(client);
         services.AddSingleton<ICompliments>(new EphemeralCompliments(
-            "You are the most amazing partner in the whole universe <3",
-            "No wonder your eyes are blue, I could get lost in them like an ocean",
-            "You're a gift to those around you",
-            "You fill my world with colour <3",
-            "Your sweetness can rival sugar",
-            "Your hair is so soft I wanna play in it sdnjfcsdjfsduihgfsjilbfsjodfdsohji -Nat",
-            "You are so adorable and kind <3",
-            "You're plain cute <33",
-            "you've got a smile that outshines the stars in the sky <3"
+            (List<string>)Config["Compliments"]
         ));
         services.AddSingleton<ILogWriter>(new LogWriter());
         services.AddSingleton<ComplimentTimer>();

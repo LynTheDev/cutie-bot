@@ -2,7 +2,7 @@
 
 public class EphemeralCompliments : ICompliments
 {
-    public EphemeralCompliments(params string[] compliments)
+    public EphemeralCompliments(List<string> compliments)
         => ComplimentsList.AddRange(compliments);
 
     private List<string> ComplimentsList = new List<string>();

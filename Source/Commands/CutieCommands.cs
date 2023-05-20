@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CutieBot.Source.Services.Compliments;
+using CutieBot.Source.XML;
 
 namespace CutieBot.Source.Commands;
 
@@ -26,9 +27,10 @@ public class CutieCommands : ApplicationCommandModule
     )
     {
         DiscordMember user = await ctx.Guild.GetMemberAsync((ulong)CutieBot.Config["NID"]);
-        await user.SendMessageAsync($"{CutieBot.Config["Name"]} wants to implement: {compliment}");
+        await user.SendMessageAsync($"{CutieBot.Config["Name"]} has implemented: {compliment}");
 
         Compliments.AddCompliment(compliment);
+        ReadXML.NewCompliment(compliment);
 
         await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
             .WithContent("Done!")
