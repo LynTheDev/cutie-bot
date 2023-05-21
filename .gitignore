@@ -1,8 +1,12 @@
+# IDE stuff
 .vscode/
 .vs/
 .idea/
 
 Data/Config.xml
+# Release folder
+CutieBot/
 
+# C# dumb stuff
 obj/
 bin/
